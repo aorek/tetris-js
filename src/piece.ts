@@ -1,4 +1,4 @@
-import { CONTROLS, PIECE_TYPES } from './constants'
+import { PIECE_TYPES } from './constants'
 import { Game } from './game'
 
 type Shape = number[][]
@@ -19,25 +19,29 @@ export interface SolidifyCoordenates extends Position { value: number }
 export class Piece {
   private readonly position: Position
   private readonly color: string
+  private shape: Shape
 
-  constructor (
-    private readonly game: Game,
-    private readonly shape: Shape,
-    private readonly onSolidify: (coordenates: SolidifyCoordenates[]) => void
-  ) {
-    this.color = colors[Math.floor(Math.random() * colors.length)]
-    // TODO: calculate random inital postion
-    this.position = { x: 1, y: 1 }
-
-    this.inizializeControls()
-  }
-
-  static randomPiece (): number[][] {
+  static randomPiece (): { shape: number[][], width: number } {
     const types = Object.keys(PIECE_TYPES)
     const randomIndex = Math.floor(Math.random() * types.length)
     const type = types[randomIndex]
 
-    return PIECE_TYPES[type]
+    return { shape: PIECE_TYPES[type], width: PIECE_TYPES[type][0].length }
+  }
+
+  private static calculateInitialX (pieceWidth: number, boardWidth: number): number {
+    return Math.floor((boardWidth - pieceWidth) / 2)
+  }
+
+  constructor (
+    private readonly game: Game,
+    shape: Shape,
+    pieceWidth: number,
+    private readonly onSolidify: (coordenates: SolidifyCoordenates[]) => void
+  ) {
+    this.color = colors[Math.floor(Math.random() * colors.length)]
+    this.shape = shape
+    this.position = { x: Piece.calculateInitialX(pieceWidth, game.getWidth()), y: 0 }
   }
 
   draw (): void {
@@ -51,9 +55,9 @@ export class Piece {
     })
   }
 
-  // spawPiece (): Position {
-
-  // }
+  checkCollision (): boolean {
+    return this.hasCollisionWithShape(this.shape, this.position)
+  }
 
   hasCollision (newCoordenates: { x: number, y: number }): boolean {
     const blocks = this.shape.find((row, y) => {
@@ -66,26 +70,38 @@ export class Piece {
     return blocks !== undefined && blocks.length > 0
   }
 
+  moveLeft (): void {
+    this.move(-1)
+  }
+
+  moveRight (): void {
+    this.move(1)
+  }
+
   moveDown (): void {
     if (!this.move(0, 1)) {
       this.onSolidify(this.retriveSetPosition())
     }
   }
 
-  private inizializeControls (): void {
-    document.addEventListener('keydown', event => {
-      if (event.key === CONTROLS.down) this.moveDown()
-      if (event.key === CONTROLS.left) this.moveLeft()
-      if (event.key === CONTROLS.right) this.moveRight()
-    })
+  rotate (): void {
+    const rotated = this.shape[0].map((_, colIndex) =>
+      this.shape.map(row => row[colIndex]).reverse()
+    )
+
+    if (!this.hasCollisionWithShape(rotated, this.position)) {
+      this.shape = rotated
+    }
   }
 
-  private moveLeft (): void {
-    this.move(-1)
-  }
-
-  private moveRight (): void {
-    this.move(1)
+  private hasCollisionWithShape (shape: Shape, position: Position): boolean {
+    return shape.some((row, y) =>
+      row.some((value, x) => {
+        if (value !== 1) return false
+        const board = this.game.getBoard()
+        return board[y + position.y]?.[x + position.x] !== 0
+      })
+    )
   }
 
   private move (x = 0, y = 0): boolean {

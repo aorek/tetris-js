@@ -1,13 +1,20 @@
 export const BOARD_HEIGHT = 30
 export const BOARD_WIDTH = 14
-export const BLOCK_SIZE = 20
+export const BLOCK_SIZE = 15
 
 export const CONTROLS = {
   down: 'ArrowDown',
   left: 'ArrowLeft',
   right: 'ArrowRight',
-  up: 'ArrowUp'
+  rotate: ' ',
+  pause: 'Escape'
 }
+
+export const POINTS_PER_LINE = 100
+export const LINES_PER_LEVEL = 10
+export const INITIAL_DROP_INTERVAL = 1000
+export const SPEED_DECREASE_PER_LEVEL = 75
+export const MIN_DROP_INTERVAL = 100
 
 export const PIECE_TYPES: { [k: string]: number[][] } = {
   iBlock: [
