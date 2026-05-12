@@ -38,21 +38,22 @@ canvas {
 
 .score-panel {
   position: absolute;
-  left: calc(100% + 20px);
+  left: calc(100% + 30px);
   background: #1a1a1a;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
-  min-width: 120px;
+  min-width: 180px;
 }
 
 .score-panel div {
-  margin: 10px 0;
-  font-size: 1.2rem;
+  margin: 15px 0;
+  font-size: 1.8rem;
 }
 
 .score-panel span {
   font-weight: bold;
   color: #646cff;
+  font-size: 1.5rem;
 }
 
 #start-menu {
@@ -70,7 +71,7 @@ canvas {
 }
 
 #start-menu h1 {
-  font-size: 5rem;
+  font-size: 7.5rem;
   font-family: 'Arial Black', sans-serif;
   color: #fff;
   text-shadow:
@@ -103,25 +104,26 @@ canvas {
 }
 
 #start-menu > p {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   color: #888;
   margin-bottom: 40px;
 }
 
 #start-menu .controls {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px 40px;
+  padding: 30px 60px;
   border-radius: 10px;
   text-align: center;
 }
 
 #start-menu .controls p {
-  margin: 8px 0;
+  margin: 12px 0;
   color: #fff;
+  font-size: 1.3rem;
 }
 
 #start-menu .controls p:first-child {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 15px;
   color: #00ffff;
@@ -142,13 +144,13 @@ canvas {
 }
 
 #game-over h2 {
-  font-size: 3rem;
+  font-size: 4.5rem;
   color: #ff4444;
   margin-bottom: 20px;
 }
 
 #game-over p {
-  font-size: 1.5rem;
+  font-size: 2.25rem;
   color: #fff;
   margin: 10px 0;
 }
@@ -173,7 +175,7 @@ canvas {
 }
 
 #pause-menu h2 {
-  font-size: 3rem;
+  font-size: 4.5rem;
   color: #ffff00;
   margin-bottom: 30px;
 }
@@ -182,8 +184,8 @@ canvas {
   background: #333;
   color: #fff;
   border: 2px solid #fff;
-  padding: 15px 40px;
-  font-size: 1.2rem;
+  padding: 22px 60px;
+  font-size: 1.8rem;
   margin: 10px;
   cursor: pointer;
   border-radius: 8px;

@@ -1,6 +1,6 @@
 export const BOARD_HEIGHT = 30
 export const BOARD_WIDTH = 14
-export const BLOCK_SIZE = 15
+export const BLOCK_SIZE = 23
 
 export const CONTROLS = {
   down: 'ArrowDown',
