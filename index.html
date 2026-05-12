@@ -8,7 +8,14 @@
   </head>
   <body>
     <div id="app">
-      <canvas></canvas>
+      <div class="game-container">
+        <canvas></canvas>
+        <div class="score-panel">
+          <div>Score: <span id="score">0</span></div>
+          <div>Level: <span id="level">1</span></div>
+          <div>Lines: <span id="lines">0</span></div>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
